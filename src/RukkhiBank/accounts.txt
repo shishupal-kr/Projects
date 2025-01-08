@@ -1,0 +1,2 @@
+Current,rukkhi,123456,rukkhi@gmail.com,60000.0
+Savings,shishupal,12345,shishupal@gmail.com,100000.0
