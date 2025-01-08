@@ -141,6 +141,7 @@ public class RukkhiBankApp {
         System.exit(0);  // This will terminate the program
     }
 
+
     // Main Menu
     public static void main(String[] args) {
         boolean running = true;
