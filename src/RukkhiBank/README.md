@@ -95,4 +95,3 @@ Admin Options
 📄 License
 
 This project is open-source and free to use. Modify it as you like to fit your requirements!
- 🚀
