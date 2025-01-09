@@ -107,8 +107,49 @@ public class RukkhiBankJdbc {
             System.out.println("Error fetching accounts: " + e.getMessage());
         }
     }
+    public static boolean transferFunds(String fromAccountNumber, String toAccountNumber, double amount) {
+        String debitQuery = "UPDATE BankAccount SET balance = balance - ? WHERE accountNumber = ? AND balance >= ?";
+        String creditQuery = "UPDATE BankAccount SET balance = balance + ? WHERE accountNumber = ?";
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            connection.setAutoCommit(false); // Start transaction
 
-    public static void viewAllAccounts() {
+            try (PreparedStatement debitStatement = connection.prepareStatement(debitQuery);
+                 PreparedStatement creditStatement = connection.prepareStatement(creditQuery)) {
 
+                // Deduct from sender
+                debitStatement.setDouble(1, amount);
+                debitStatement.setString(2, fromAccountNumber);
+                debitStatement.setDouble(3, amount);
+                int debitResult = debitStatement.executeUpdate();
+
+                if (debitResult == 0) {
+                    System.out.println("Insufficient balance or account not found.");
+                    connection.rollback();
+                    return false;
+                }
+
+                // Add to receiver
+                creditStatement.setDouble(1, amount);
+                creditStatement.setString(2, toAccountNumber);
+                int creditResult = creditStatement.executeUpdate();
+
+                if (creditResult == 0) {
+                    System.out.println("Recipient account not found. Rolling back transaction.");
+                    connection.rollback();
+                    return false;
+                }
+
+                connection.commit(); // Commit transaction
+                return true;
+
+            } catch (SQLException e) {
+                System.err.println("Error during fund transfer: " + e.getMessage());
+                connection.rollback(); // Rollback in case of error
+            }
+        } catch (SQLException e) {
+            System.err.println("Database connection error: " + e.getMessage());
+        }
+        return false;
     }
+
 }

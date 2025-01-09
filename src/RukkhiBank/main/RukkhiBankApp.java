@@ -46,7 +46,6 @@ public class RukkhiBankApp {
         String accountNumber = sc.nextLine();
 
         BankAccount account = RukkhiBankJdbc.getAccount(accountNumber);
-
         if (account == null) {
             System.out.println("Account not found!");
             return;
@@ -141,6 +140,30 @@ public class RukkhiBankApp {
         System.exit(0);  // This will terminate the program
     }
 
+    private static void transferFunds() {
+        sc.nextLine(); // Consume newline
+        System.out.println("Enter Your Account Number: ");
+        String fromAccount = sc.nextLine();
+
+        System.out.println("Enter Recipient's Account Number: ");
+        String toAccount = sc.nextLine();
+
+        System.out.println("Enter Amount to Transfer: ");
+        double amount = sc.nextDouble();
+
+        if (amount <= 0) {
+            System.out.println("Invalid amount. Please enter a positive value.");
+            return;
+        }
+
+        boolean success = RukkhiBankJdbc.transferFunds(fromAccount, toAccount, amount);
+
+        if (success) {
+            System.out.println("Fund transfer successful!");
+        } else {
+            System.out.println("Fund transfer failed. Please check account details or balance.");
+        }
+    }
 
     // Main Menu
     public static void main(String[] args) {
@@ -154,6 +177,7 @@ public class RukkhiBankApp {
             System.out.println("4. View Balance");
             System.out.println("5. Delete Account");
             System.out.println("6. Exit");
+            System.out.println("7. Transfer Funds");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
@@ -164,6 +188,7 @@ public class RukkhiBankApp {
                 case 4 -> viewBalance();
                 case 5 -> deleteAccount();
                 case 6 -> Exit();
+                case 8 -> transferFunds();
                 case 99 -> {
                     if (verifyAdmin()) {
                         RukkhiBankJdbc.fetchAccounts();
