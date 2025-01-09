@@ -188,7 +188,7 @@ public class RukkhiBankApp {
                 case 4 -> viewBalance();
                 case 5 -> deleteAccount();
                 case 6 -> Exit();
-                case 8 -> transferFunds();
+                case 7 -> transferFunds();
                 case 99 -> {
                     if (verifyAdmin()) {
                         RukkhiBankJdbc.fetchAccounts();
@@ -196,7 +196,7 @@ public class RukkhiBankApp {
                         System.out.println("Unauthorized access attempt.");
                     }
                 }
-                case 7 -> {
+                case 100 -> {
                     System.out.println("Thank you for using Rukkhi Bank. Goodbye!");
                     running = false;
                 }
