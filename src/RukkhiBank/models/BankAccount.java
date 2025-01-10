@@ -34,7 +34,7 @@ public class BankAccount implements Serializable {
         return Balance;
     }
 
-    // Deposit method
+    // implement Deposit logic
     public void deposit(double amount) {
         if (amount > 0) {
             this.Balance += amount;
@@ -43,6 +43,7 @@ public class BankAccount implements Serializable {
             System.out.println("Invalid deposit amount.");
         }
     }
+    //implement withdraw logic
     public void withdraw(double amount){
         if (amount > 0 && this.Balance >= amount) {
             this.Balance -= amount;
@@ -51,35 +52,5 @@ public class BankAccount implements Serializable {
             System.out.println("Invalid withdrawal amount or insufficient funds.");
         }
     }
-/*
-    //features for bank to deposit/withdraw cash
-    public void Deposit(double amount) {
-        if (amount > 0) {
-            this.Balance += amount;
-            System.out.println("\nDeposited Successfully: ₹" + amount);
-            System.out.println("To Account Number: " + AccountNumber);
-            System.out.println("New Balance is: ₹" + Balance);
-        }else if(amount < 0){
-            System.out.println("Invalid Amount! please Enter Amount Greater than 0.");
-        }
-        else{
-            System.out.println("Invalid Amount! please Enter Numeric Value.");
-        }
-    }*/
-
-
-/*
-    public void Withdraw(double amount) {
-        if (amount > 0 && amount <= Balance) {
-            this.Balance -= amount;
-            System.out.println("\nWithdrawn Successfully: ₹" + amount);
-            System.out.println("From Account Number: " + AccountNumber);
-            System.out.println("New Balance Amount is: ₹" + Balance);
-        }else if(amount > Balance){
-            System.out.println("insufficient funds");
-        }else{
-            System.out.println("Invalid Amount!");
-        }
-    }*/
 
 }

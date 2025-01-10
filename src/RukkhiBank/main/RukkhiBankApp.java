@@ -47,40 +47,12 @@ public class RukkhiBankApp {
         System.out.println("Enter Amount to Deposit: ");
         double amount = sc.nextDouble();
 
+
         // Delegate the deposit operation to TransactionManager
         if (!TransactionManager.deposit(accountNumber, amount)) {
             System.out.println("Deposit failed. Please try again.");
         }
     }
-/*
-    // Deposit
-    private static void deposit() {
-        sc.nextLine();
-        System.out.println("Enter Account Number: ");
-        String accountNumber = sc.nextLine();
-
-        BankAccount account = RukkhiBankJdbc.getAccount(accountNumber);
-        if (account == null) {
-            System.out.println("Account not found!");
-            return;
-        }
-
-        System.out.println("Enter Amount to Deposit: ");
-        double amount = sc.nextDouble();
-
-        if (amount > 0) {
-            account.Deposit(amount);
-            if (RukkhiBankJdbc.updateBalance(account)) {
-               //System.out.println("Deposit successful! New Balance: ₹" + account.getBalance() +
-               //  "\nWith Account Holder Name"+ account.getAccountHolderName());
-            } else {
-                System.out.println("Failed to update balance.");
-            }
-        } else {
-            System.out.println("Invalid deposit amount.");
-        }
-    }
-*/
 
     private static void withdraw() {
         Scanner sc = new Scanner(System.in);
@@ -94,36 +66,6 @@ public class RukkhiBankApp {
             System.out.println("Withdrawal failed. Please try again.");
         }
     }
-
-
-    /*
-    // Withdraw
-    private static void withdraw() {
-        sc.nextLine();
-        System.out.println("Enter Account Number: ");
-        String accountNumber = sc.nextLine();
-
-        BankAccount account = RukkhiBankJdbc.getAccount(accountNumber);
-
-        if (account == null) {
-            System.out.println("Account not found!");
-            return;
-        }
-
-        System.out.println("Enter Amount to Withdraw: ");
-        double amount = sc.nextDouble();
-
-        if (amount > 0 && account.getBalance() >= amount) {
-            account.Withdraw(amount);
-            if (RukkhiBankJdbc.updateBalance(account)) {
-               // System.out.println("Withdrawal successful! New Balance: ₹" + account.getBalance());
-            } else {
-                System.out.println("Failed to update balance.");
-            }
-        } else {
-            System.out.println("Insufficient balance or invalid withdrawal amount.");
-        }
-    }*/
 
     // View Balance
     private static void viewBalance() {

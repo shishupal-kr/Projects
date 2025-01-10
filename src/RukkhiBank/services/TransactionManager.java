@@ -5,13 +5,7 @@ import RukkhiBank.storage.RukkhiBankJdbc;
 
 public class TransactionManager {
 
-    /**
-     * Handles the deposit operation.
-     *
-     * @param accountNumber The account number to deposit money into.
-     * @param amount The amount to deposit.
-     * @return true if the deposit was successful; false otherwise.
-     */
+    //Deposit logic for
     public static boolean deposit(String accountNumber, double amount) {
         // Validate deposit amount
         if (amount <= 0) {
@@ -40,6 +34,7 @@ public class TransactionManager {
         }
     }
 
+    //withdraw
     public static boolean withdraw(String accountNumber, double amount) {
         // Validate withdrawal amount
         if (amount <= 0) {
@@ -73,4 +68,5 @@ public class TransactionManager {
             return false;
         }
     }
+
 }
