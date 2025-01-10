@@ -67,13 +67,13 @@ public class TransactionManager {
         }
     }
 
-    // New method for transferring funds
     public static boolean transferFunds(String fromAccountNumber, String toAccountNumber, double amount) {
         // Validate the amount
         if (amount <= 0) {
             System.out.println("Invalid amount. Please enter a positive value.");
             return false;
         }
+
         // Fetch both the sender and recipient accounts
         BankAccount fromAccount = AccountManager.getAccount(fromAccountNumber);
         BankAccount toAccount = AccountManager.getAccount(toAccountNumber);
@@ -93,16 +93,20 @@ public class TransactionManager {
             return false;
         }
 
-        // Update both accounts in the database
-        if (RukkhiBankJdbc.updateBalance(fromAccount) && RukkhiBankJdbc.updateBalance(toAccount)) {
+        // Call the transferFunds method in RukkhiBankJdbc to handle the transaction
+        boolean success = RukkhiBankJdbc.transferFunds(fromAccountNumber, toAccountNumber, amount);
+
+        if (success) {
             System.out.println("Fund transfer successful: ₹" + amount);
-            System.out.println("Sender Account New Balance: ₹" + fromAccount.getBalance());
-            System.out.println("Recipient Account New Balance: ₹" + toAccount.getBalance());
-            return true;
-        } else {
-            System.out.println("Failed to update balance in the database.");
-            return false;
+            System.out.println("From Account Number: " + fromAccount.getAccountNumber());
+            System.out.println("To Account Number: " + toAccount.getAccountNumber());
+            System.out.println("Remaining Balance in Sender's Account: ₹" + fromAccount.getBalance());
+            System.out.println("Updated Balance in Recipient's Account: ₹" + toAccount.getBalance());
+    } else {
+            System.out.println("Fund transfer failed. Please check account details or balance.");
         }
+
+        return success;
     }
 
 }

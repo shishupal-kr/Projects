@@ -7,7 +7,6 @@ import java.util.HashMap;
 public class AccountManager {
          public static HashMap<String, BankAccount> accounts = new HashMap<>();
 
-
     public static BankAccount getAccount(String accountNumber) {
         if (accounts.containsKey(accountNumber)) {
             return accounts.get(accountNumber); // Account is found in memory

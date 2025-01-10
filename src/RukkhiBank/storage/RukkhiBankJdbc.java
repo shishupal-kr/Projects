@@ -89,7 +89,7 @@ public class RukkhiBankJdbc {
              Statement statement = connection.createStatement();
              ResultSet result = statement.executeQuery(query)) {
 
-            System.out.println("--Details of Accounts in Rukkhi Bank--");
+            System.out.println("\n--Details of Accounts in Rukkhi Bank--");
             while (result.next()) {
                 String accountNumber = result.getString("accountNumber");
                 String accountHolderName = result.getString("accountHolderName");
