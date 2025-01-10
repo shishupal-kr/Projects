@@ -1,8 +1,6 @@
 package newapp;
 import java.sql.*;
 
-import RukkhiBank.models.BankAccount;
-
 public class RukkhiBankJdbc2 {
     private static final String url = "jdbc:mysql://127.0.0.1:3306/RukkhiBank";  //enter DATABASE name here
     private static final String username = "rukkhibank";

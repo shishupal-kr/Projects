@@ -12,12 +12,12 @@ public class AccountManager {
         if (accounts.containsKey(accountNumber)) {
             return accounts.get(accountNumber); // Account is found in memory
         } else {
-            System.out.println("Account not found in AccountManager. Fetching from DB...");
+           // System.out.println("Account not found in AccountManager. Fetching from DB...");
             BankAccount account = RukkhiBankJdbc.getAccount(accountNumber);
             if (account != null) {
-                accounts.put(accountNumber, account); // Add to in-memory cache
+                accounts.put(accountNumber, account);
             }
-            return account; // Return the fetched account (or null if not found in DB)
+            return account;
         }
     }
 
