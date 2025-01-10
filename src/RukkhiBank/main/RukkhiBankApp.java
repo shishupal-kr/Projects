@@ -123,6 +123,23 @@ public class RukkhiBankApp {
         System.out.println("Enter Amount to Transfer: ");
         double amount = sc.nextDouble();
 
+        // Call the TransactionManager's transferFunds method
+        if (!TransactionManager.transferFunds(fromAccount, toAccount, amount)) {
+            System.out.println("Fund transfer failed. Please check account details or balance.");
+        }
+    }
+/*
+    private static void transferFunds() {
+        sc.nextLine(); // Consume newline
+        System.out.println("Enter Your Account Number: ");
+        String fromAccount = sc.nextLine();
+
+        System.out.println("Enter Recipient's Account Number: ");
+        String toAccount = sc.nextLine();
+
+        System.out.println("Enter Amount to Transfer: ");
+        double amount = sc.nextDouble();
+
         if (amount <= 0) {
             System.out.println("Invalid amount. Please enter a positive value.");
             return;
@@ -135,7 +152,7 @@ public class RukkhiBankApp {
         } else {
             System.out.println("Fund transfer failed. Please check account details or balance.");
         }
-    }
+    }*/
 
     // Main Menu
     public static void main(String[] args) {

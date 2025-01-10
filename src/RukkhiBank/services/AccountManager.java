@@ -1,55 +1,24 @@
 package RukkhiBank.services;
 import RukkhiBank.models.BankAccount;
-import newapp.FileStorage;
+import RukkhiBank.storage.RukkhiBankJdbc;
 
 import java.util.HashMap;
-import static newapp.FileStorage.saveAccountsToFile;
-
 
 public class AccountManager {
          public static HashMap<String, BankAccount> accounts = new HashMap<>();
 
-        static {
-            // Load accounts at startup
-            FileStorage.loadAccountsFromFile(AccountManager.accounts);
-        }
 
-    public static void addAccount(BankAccount account) {
-        if (accounts.containsKey(account.getAccountNumber())) {
-            System.out.println("Account with this number already exists. Cannot add.");
+    public static BankAccount getAccount(String accountNumber) {
+        if (accounts.containsKey(accountNumber)) {
+            return accounts.get(accountNumber); // Account is found in memory
         } else {
-            accounts.put(account.getAccountNumber(), account);
-            saveAccountsToFile(accounts);
-        }
-    }
-
-
-        public static BankAccount getAccount(String accountNumber) {
-
-            return accounts.get(accountNumber);
-        }
-
-        public static void viewAllAccounts() {
-            if (accounts.isEmpty()) {
-                System.out.println("No accounts found.");
-                return;
+            System.out.println("Account not found in AccountManager. Fetching from DB...");
+            BankAccount account = RukkhiBankJdbc.getAccount(accountNumber);
+            if (account != null) {
+                accounts.put(accountNumber, account); // Add to in-memory cache
             }
-
-            System.out.println("--- List of All Accounts ---");
-            for (BankAccount account : accounts.values()) {
-                System.out.println("Account Number: " + account.getAccountNumber());
-                System.out.println("Account Name: " + account.getAccountHolderName());
-                System.out.println("Account Type: " + account.getAccountType());
-                System.out.println("Email: " + account.getEmail());
-                System.out.println("Balance: ₹" + account.getBalance());
-                System.out.println("----------------------------");
-            }
+            return account; // Return the fetched account (or null if not found in DB)
         }
-
-    public static boolean accountExists(String accountNumber) {
-        return false;
     }
 
-    public static void loadAccountsFromFile() {
-    }
 }

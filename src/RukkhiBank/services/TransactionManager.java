@@ -69,4 +69,48 @@ public class TransactionManager {
         }
     }
 
+    // New method for transferring funds
+    public static boolean transferFunds(String fromAccountNumber, String toAccountNumber, double amount) {
+        // Validate the amount
+        if (amount <= 0) {
+            System.out.println("Invalid amount. Please enter a positive value.");
+            return false;
+        }
+
+        // Fetch both the sender and recipient accounts
+        BankAccount fromAccount = AccountManager.getAccount(fromAccountNumber);
+        BankAccount toAccount = AccountManager.getAccount(toAccountNumber);
+
+        if (fromAccount == null) {
+            System.out.println("Sender account not found!");
+            return false;
+        }
+
+        if (toAccount == null) {
+            System.out.println("Recipient account not found!");
+            return false;
+        }
+
+        // Check if the sender has sufficient balance
+        if (fromAccount.getBalance() < amount) {
+            System.out.println("Insufficient funds in sender account.");
+            return false;
+        }
+
+        // Perform the transaction
+        fromAccount.withdraw(amount); // Deduct from sender
+        toAccount.deposit(amount);     // Add to recipient
+
+        // Update both accounts in the database
+        if (RukkhiBankJdbc.updateBalance(fromAccount) && RukkhiBankJdbc.updateBalance(toAccount)) {
+            System.out.println("Fund transfer successful!");
+            System.out.println("Sender New Balance: ₹" + fromAccount.getBalance());
+            System.out.println("Recipient New Balance: ₹" + toAccount.getBalance());
+            return true;
+        } else {
+            System.out.println("Failed to update balance in the database.");
+            return false;
+        }
+    }
+
 }

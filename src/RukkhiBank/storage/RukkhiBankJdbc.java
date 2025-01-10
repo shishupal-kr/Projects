@@ -51,6 +51,7 @@ public class RukkhiBankJdbc {
         }
         return null; // Return null if the account is not found
     }
+
     // Update account balance in the database
     public static boolean updateBalance(BankAccount account) {
         String query = "UPDATE BankAccount SET balance = ? WHERE accountNumber = ?";
