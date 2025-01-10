@@ -51,7 +51,21 @@ public class RukkhiBankJdbc {
         }
         return null; // Return null if the account is not found
     }
+    // Update account balance in the database
+    public static boolean updateBalance(BankAccount account) {
+        String query = "UPDATE BankAccount SET balance = ? WHERE accountNumber = ?";
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
+            statement.setDouble(1, account.getBalance());
+            statement.setString(2, account.getAccountNumber());
+
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error while updating balance: " + e.getMessage());
+            return false;
+        }
+    }/*
     // Method to update the balance of an account
     public static boolean updateBalance(BankAccount account) {
         String query = "UPDATE BankAccount SET balance = ? WHERE accountNumber = ?";
@@ -66,7 +80,7 @@ public class RukkhiBankJdbc {
             System.err.println("Error while updating balance: " + e.getMessage());
         }
         return false;
-    }
+    }*/
 
     // Method to delete an account by account number
     public static boolean deleteAccount(String accountNumber) {

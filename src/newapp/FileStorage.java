@@ -1,4 +1,4 @@
-package RukkhiBank.storage;
+package newapp;
 
 import RukkhiBank.models.BankAccount;
 import RukkhiBank.services.AccountManager;

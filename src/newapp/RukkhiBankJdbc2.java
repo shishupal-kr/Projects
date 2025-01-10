@@ -1,4 +1,4 @@
-package RukkhiBank.storage;
+package newapp;
 import java.sql.*;
 
 import RukkhiBank.models.BankAccount;

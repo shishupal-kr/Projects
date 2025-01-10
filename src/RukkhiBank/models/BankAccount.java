@@ -34,7 +34,24 @@ public class BankAccount implements Serializable {
         return Balance;
     }
 
-
+    // Deposit method
+    public void deposit(double amount) {
+        if (amount > 0) {
+            this.Balance += amount;
+            System.out.println("\nDeposited Successfully: ₹" + amount);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+    public void withdraw(double amount){
+        if (amount > 0 && this.Balance >= amount) {
+            this.Balance -= amount;
+            System.out.println("\nWithdrawn Successfully: ₹" + amount);
+        } else {
+            System.out.println("Invalid withdrawal amount or insufficient funds.");
+        }
+    }
+/*
     //features for bank to deposit/withdraw cash
     public void Deposit(double amount) {
         if (amount > 0) {
@@ -48,8 +65,10 @@ public class BankAccount implements Serializable {
         else{
             System.out.println("Invalid Amount! please Enter Numeric Value.");
         }
-    }
+    }*/
 
+
+/*
     public void Withdraw(double amount) {
         if (amount > 0 && amount <= Balance) {
             this.Balance -= amount;
@@ -61,6 +80,6 @@ public class BankAccount implements Serializable {
         }else{
             System.out.println("Invalid Amount!");
         }
-    }
+    }*/
 
 }

@@ -1,6 +1,7 @@
 package RukkhiBank.main;
 
 import RukkhiBank.models.BankAccount;
+import RukkhiBank.services.TransactionManager;
 import RukkhiBank.storage.RukkhiBankJdbc;
 import java.util.Scanner;
 import static RukkhiBank.services.Security.verifyAdmin;
@@ -39,6 +40,19 @@ public class RukkhiBankApp {
         }
     }
 
+    private static void deposit() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Account Number: ");
+        String accountNumber = sc.nextLine();
+        System.out.println("Enter Amount to Deposit: ");
+        double amount = sc.nextDouble();
+
+        // Delegate the deposit operation to TransactionManager
+        if (!TransactionManager.deposit(accountNumber, amount)) {
+            System.out.println("Deposit failed. Please try again.");
+        }
+    }
+/*
     // Deposit
     private static void deposit() {
         sc.nextLine();
@@ -66,7 +80,23 @@ public class RukkhiBankApp {
             System.out.println("Invalid deposit amount.");
         }
     }
+*/
 
+    private static void withdraw() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Account Number: ");
+        String accountNumber = sc.nextLine();
+        System.out.println("Enter Amount to Withdraw: ");
+        double amount = sc.nextDouble();
+
+        // Delegate the withdrawal operation to TransactionManager
+        if (!TransactionManager.withdraw(accountNumber, amount)) {
+            System.out.println("Withdrawal failed. Please try again.");
+        }
+    }
+
+
+    /*
     // Withdraw
     private static void withdraw() {
         sc.nextLine();
@@ -93,7 +123,7 @@ public class RukkhiBankApp {
         } else {
             System.out.println("Insufficient balance or invalid withdrawal amount.");
         }
-    }
+    }*/
 
     // View Balance
     private static void viewBalance() {

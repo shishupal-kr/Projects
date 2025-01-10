@@ -1,9 +1,9 @@
 package RukkhiBank.services;
 import RukkhiBank.models.BankAccount;
-import RukkhiBank.storage.FileStorage;
+import newapp.FileStorage;
 
 import java.util.HashMap;
-import static RukkhiBank.storage.FileStorage.saveAccountsToFile;
+import static newapp.FileStorage.saveAccountsToFile;
 
 
 public class AccountManager {
@@ -22,25 +22,7 @@ public class AccountManager {
             saveAccountsToFile(accounts);
         }
     }
-    // Consolidated deleteAccount method
-    public static boolean deleteAccount(String accountNumber) {
-        // Admin verification
-        if (!Security.verifyAdmin()) {
-            System.out.println("Invalid admin password. Deletion aborted.");
-            return false;
-        }
 
-        // Deleting the account if it exists
-        if (accounts.containsKey(accountNumber)) {
-            accounts.remove(accountNumber);
-            saveAccountsToFile(accounts);
-            System.out.println("Account Deleted Successfully: " + accountNumber);
-            return true;
-        } else {
-            System.out.println("Account not found.");
-            return false;
-        }
-    }
 
         public static BankAccount getAccount(String accountNumber) {
 
@@ -64,10 +46,10 @@ public class AccountManager {
             }
         }
 
-    public static void loadAccountsFromFile() {
-    }
-
     public static boolean accountExists(String accountNumber) {
         return false;
+    }
+
+    public static void loadAccountsFromFile() {
     }
 }
