@@ -1,6 +1,8 @@
 package RukkhiBank.storage;
 
 import RukkhiBank.models.BankAccount;
+import RukkhiBank.services.AccountManager;
+
 import java.sql.*;
 
 public class RukkhiBankJdbc {
@@ -107,7 +109,8 @@ public class RukkhiBankJdbc {
             System.out.println("Error fetching accounts: " + e.getMessage());
         }
     }
-    public static boolean transferFunds(String fromAccountNumber, String toAccountNumber, double amount) {
+
+   public static boolean transferFunds(String fromAccountNumber, String toAccountNumber, double amount) {
         String debitQuery = "UPDATE BankAccount SET balance = balance - ? WHERE accountNumber = ? AND balance >= ?";
         String creditQuery = "UPDATE BankAccount SET balance = balance + ? WHERE accountNumber = ?";
         try (Connection connection = DriverManager.getConnection(url, username, password)) {

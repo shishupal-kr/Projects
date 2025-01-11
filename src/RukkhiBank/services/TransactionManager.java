@@ -100,13 +100,14 @@ public class TransactionManager {
             System.out.println("Fund transfer successful: ₹" + amount);
             System.out.println("From Account Number: " + fromAccount.getAccountNumber());
             System.out.println("To Account Number: " + toAccount.getAccountNumber());
-            System.out.println("Remaining Balance in Sender's Account: ₹" + fromAccount.getBalance());
-            System.out.println("Updated Balance in Recipient's Account: ₹" + toAccount.getBalance());
+           // System.out.println("Remaining Balance in Sender's Account: ₹" + fromAccount.getBalance());
+            //System.out.println("Updated Balance in Recipient's Account: ₹" + toAccount.getBalance());
     } else {
             System.out.println("Fund transfer failed. Please check account details or balance.");
         }
 
         return success;
     }
+
 
 }
